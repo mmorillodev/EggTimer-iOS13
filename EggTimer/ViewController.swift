@@ -10,6 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let hardnessDict = [
+        "Soft": 5,
+        "Medium": 7,
+        "Hard": 12,
+    ]
 
-
+    @IBAction func hardenessSelected(_ sender: UIButton) {
+        print(hardnessDict[sender.titleLabel!.text!] ?? "Not found")
+    }
+    
 }
