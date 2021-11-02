@@ -7,38 +7,66 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class ViewController: UIViewController {
     
     static let secondsInAMinute = 60
     static let hardnessDict = [
-        "Soft": 1 * secondsInAMinute,
+        "Soft": 5 * secondsInAMinute,
         "Medium": 7 * secondsInAMinute,
         "Hard": 12 * secondsInAMinute,
     ]
     
     var timer: Timer?
     var secondsRemaining = 0
+    var totalSeconds = 0
     
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var passedTime: UIProgressView!
     
     @IBAction func hardenessSelected(_ sender: UIButton) {
-        if(timer != nil) {
-            timer!.invalidate()
-        }
-
-        secondsRemaining = ViewController.hardnessDict[sender.currentTitle!] ?? 0
+        let hardness = sender.currentTitle!
+        
+        resetItems(hardness: hardness)
+        
+        totalSeconds = ViewController.hardnessDict[hardness] ?? 0
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
     }
     
     @objc func startTimer() {
-        if secondsRemaining > 0 {
-            print("\(secondsRemaining)")
-            secondsRemaining -= 1
+        if secondsRemaining <= totalSeconds {
+            let computedProgress = Float(secondsRemaining) / Float(totalSeconds)
+            secondsRemaining += 1
+                        
+            passedTime.setProgress(computedProgress, animated: true)
         } else {
-            label.text = "Done!"
+            terminateTimer()
+        }
+    }
+    
+    func resetItems(hardness: String) {
+        label.text = "How do you like your eggs?"
+        passedTime.setProgress(0, animated: false)
+        secondsRemaining = 0
+        
+        if(timer != nil) {
             timer!.invalidate()
         }
+    }
+    
+    func terminateTimer() {
+        label.text = "Done!"
+        timer!.invalidate()
+        playSound()
+    }
+    
+    func playSound() {
+        let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")
+        let player = try? AVAudioPlayer(contentsOf: url!)
+        
+        player!.play()
     }
 }

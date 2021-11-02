@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -121,6 +122,18 @@
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJN-th-c5K" userLabel="Timer View">
                                         <rect key="frame" x="0.0" y="571.5" width="374" height="246.5"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qtf-Vg-eK8">
+                                                <rect key="frame" x="0.0" y="121" width="374" height="4"/>
+                                                <color key="progressTintColor" systemColor="systemYellowColor"/>
+                                                <color key="trackTintColor" systemColor="systemGray2Color"/>
+                                            </progressView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Qtf-Vg-eK8" firstAttribute="centerX" secondItem="nJN-th-c5K" secondAttribute="centerX" id="KXJ-Ha-w77"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qtf-Vg-eK8" secondAttribute="trailing" id="UZK-oe-Vz6"/>
+                                            <constraint firstItem="Qtf-Vg-eK8" firstAttribute="leading" secondItem="nJN-th-c5K" secondAttribute="leading" id="yhF-7E-3Qo"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -136,6 +149,7 @@
                     </view>
                     <connections>
                         <outlet property="label" destination="XLm-5r-pSP" id="4il-ua-Dmu"/>
+                        <outlet property="passedTime" destination="Qtf-Vg-eK8" id="PJM-Ie-cTw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -147,5 +161,11 @@
         <image name="hard_egg" width="287.5" height="366"/>
         <image name="medium_egg" width="288" height="363"/>
         <image name="soft_egg" width="287" height="365"/>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
