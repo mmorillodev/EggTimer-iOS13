@@ -9,17 +9,17 @@
 import UIKit
 import AVFoundation
 
-
 class ViewController: UIViewController {
     
     static let secondsInAMinute = 60
     static let hardnessDict = [
-        "Soft": 5 * secondsInAMinute,
+        "Soft": 5,
         "Medium": 7 * secondsInAMinute,
         "Hard": 12 * secondsInAMinute,
     ]
     
     var timer: Timer?
+    var player: AVAudioPlayer?
     var secondsRemaining = 0
     var totalSeconds = 0
     
@@ -65,8 +65,8 @@ class ViewController: UIViewController {
     
     func playSound() {
         let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")
-        let player = try? AVAudioPlayer(contentsOf: url!)
         
+        player = try! AVAudioPlayer(contentsOf: url!)
         player!.play()
     }
 }
